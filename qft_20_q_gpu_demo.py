@@ -65,10 +65,13 @@ print("Gate counts:", qc.count_ops())
 # Cell 5: GPU Backend Setup
 # ------------------------------------------------------------
 
-backend = AerSimulator(
-    method="statevector",
-    device="GPU"
-)
+
+try:
+    backend = AerSimulator(method="statevector", device="GPU")
+    print("Using GPU backend")
+except Exception:
+    backend = AerSimulator(method="statevector")
+    print("Using CPU backend")
 
 # ------------------------------------------------------------
 # Cell 6: Run Simulation
